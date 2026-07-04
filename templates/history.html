@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<title>History</title>
+
+<link rel="stylesheet"
+href="/static/style.css">
+
+<style>
+
+.title{
+
+text-align:center;
+
+color:white;
+
+margin-bottom:40px;
+
+}
+
+.history{
+
+display:grid;
+
+grid-template-columns:
+repeat(
+3,
+1fr
+);
+
+gap:22px;
+
+}
+
+.city{
+
+background:
+rgba(
+255,
+255,
+255,
+0.18
+);
+
+backdrop-filter:
+blur(16px);
+
+padding:28px;
+
+border-radius:25px;
+
+text-align:center;
+
+color:white;
+
+font-size:22px;
+
+transition:0.3s;
+
+}
+
+.city:hover{
+
+transform:
+translateY(-8px);
+
+}
+
+.empty{
+
+text-align:center;
+
+color:white;
+
+font-size:22px;
+
+}
+
+@media(max-width:900px){
+
+.history{
+
+grid-template-columns:
+1fr;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body class="clouds">
+
+<div class="container">
+
+<div class="nav">
+
+<a href="/">Home</a>
+<a href="/history">History</a>
+<a href="/analytics">Analytics</a>
+<a href="/about">About</a>
+<a href="/forecast">Forecast</a>
+
+</div>
+
+<div class="title">
+
+<h1>
+
+🕘 Search History
+
+</h1>
+
+<p>
+
+Previously searched cities
+
+</p>
+
+</div>
+
+{% if history %}
+
+<div class="history">
+
+{% for city in history %}
+
+<div class="city">
+
+📍<br><br>
+
+{{ city }}
+
+</div>
+
+{% endfor %}
+
+</div>
+
+{% else %}
+
+<div class="empty">
+
+No searches yet
+
+</div>
+
+{% endif %}
+
+</div>
+
+</body>
+
+</html>

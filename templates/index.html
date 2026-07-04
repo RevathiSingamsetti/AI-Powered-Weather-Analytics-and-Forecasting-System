@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Weather Analytics</title>
+
+<link rel="stylesheet" href="/static/style.css">
+
+<style>
+
+.top{
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.hero{
+text-align:center;
+color:white;
+margin-top:20px;
+margin-bottom:30px;
+}
+
+.hero h2{
+font-size:40px;
+margin:0;
+}
+
+.hero p{
+font-size:18px;
+}
+
+.search{
+text-align:center;
+margin:30px 0;
+}
+
+.weather-icon{
+animation:float 3s ease-in-out infinite;
+}
+
+@keyframes float{
+
+0%{
+transform:translateY(0px);
+}
+
+50%{
+transform:translateY(-10px);
+}
+
+100%{
+transform:translateY(0px);
+}
+
+}
+
+.loading{
+
+opacity:0.8;
+
+pointer-events:none;
+
+}
+
+</style>
+
+</head>
+
+<body class="{{ condition|lower if condition else 'clouds' }}">
+
+<div class="container">
+
+<div class="top">
+
+<h1 style="color:white;">
+
+🌦 Weather Analytics
+
+</h1>
+
+<div class="clock" id="clock"></div>
+
+</div>
+
+<div class="nav">
+
+<a href="/">Home</a>
+
+<a href="/history">History</a>
+
+<a href="/analytics">Analytics</a>
+
+<a href="/about">About</a>
+
+<a href="/forecast">Forecast</a>
+
+</div>
+
+<div class="hero">
+
+<h2>
+
+Know Weather Before You Go
+
+</h2>
+
+<p>
+
+Live Weather • Forecast • Analytics
+
+</p>
+
+</div>
+
+<div class="search">
+
+<form onsubmit="loading()">
+
+<input
+
+name="city"
+
+placeholder="Enter City"
+
+>
+
+<button id="searchBtn">
+
+🔍 Search
+
+</button>
+
+</form>
+
+</div>
+
+{% if error %}
+
+<div class="card">
+
+<h2>
+
+{{ error }}
+
+</h2>
+
+</div>
+
+{% endif %}
+
+{% if temp %}
+
+<div class="card">
+
+<img
+
+class="weather-icon"
+
+src="{{ icon }}"
+
+>
+
+<h2>
+
+📍 {{ city }}
+
+</h2>
+
+<h1>
+
+{{ temp }}°C
+
+</h1>
+
+<h2>
+
+{{ condition }}
+
+</h2>
+
+</div>
+
+<div class="details">
+
+<div class="detail-card">
+
+💧
+
+<h3>
+
+Humidity
+
+</h3>
+
+<h2>
+
+{{ humidity }}%
+
+</h2>
+
+</div>
+
+<div class="detail-card">
+
+💨
+
+<h3>
+
+Wind
+
+</h3>
+
+<h2>
+
+{{ wind }}
+
+m/s
+
+</h2>
+
+</div>
+
+<div class="detail-card">
+
+🥵
+
+<h3>
+
+Feels Like
+
+</h3>
+
+<h2>
+
+{{ feels_like }}°C
+
+</h2>
+
+</div>
+
+<div class="detail-card">
+
+🤖
+
+<h3>
+
+ML Prediction
+
+</h3>
+
+<h2>
+
+{{ prediction }}°C
+
+</h2>
+
+</div>
+
+<div class="detail-card">
+
+🧠
+
+<h3>
+
+AI Insight
+
+</h3>
+
+<p>
+
+{{ insight }}
+
+</p>
+
+</div>
+
+</div>
+
+{% endif %}
+
+</div>
+
+<script>
+
+function clock(){
+
+document
+.getElementById(
+"clock"
+)
+
+.innerHTML=
+
+new Date()
+
+.toLocaleTimeString()
+
+}
+
+setInterval(
+clock,
+1000
+)
+
+clock()
+
+function loading(){
+
+let btn=
+
+document
+.getElementById(
+"searchBtn"
+)
+
+btn
+.classList
+.add(
+"loading"
+)
+
+btn
+.innerHTML=
+
+"⏳ Loading..."
+
+}
+
+</script>
+
+</body>
+
+</html>

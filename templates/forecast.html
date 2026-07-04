@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<title>Forecast</title>
+
+<link rel="stylesheet"
+href="/static/style.css">
+
+<style>
+
+.heading{
+
+text-align:center;
+
+color:white;
+
+margin-bottom:35px;
+
+}
+
+.heading h1{
+
+font-size:42px;
+
+}
+
+.forecast-grid{
+
+display:grid;
+
+grid-template-columns:
+repeat(
+5,
+1fr
+);
+
+gap:18px;
+
+}
+
+.forecast-card{
+
+background:
+
+rgba(
+255,
+255,
+255,
+0.18
+);
+
+backdrop-filter:
+blur(16px);
+
+padding:22px;
+
+border-radius:25px;
+
+text-align:center;
+
+color:white;
+
+transition:0.3s;
+
+}
+
+.forecast-card:hover{
+
+transform:
+translateY(-8px);
+
+}
+
+.forecast-card img{
+
+width:90px;
+
+}
+
+.time{
+
+opacity:0.8;
+
+font-size:14px;
+
+}
+
+@media(max-width:1000px){
+
+.forecast-grid{
+
+grid-template-columns:
+1fr;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body class="clouds">
+
+<div class="container">
+
+<div class="nav">
+
+<a href="/">Home</a>
+<a href="/history">History</a>
+<a href="/analytics">Analytics</a>
+<a href="/about">About</a>
+<a href="/forecast">Forecast</a>
+
+</div>
+
+<div class="heading">
+
+<h1>
+
+📅 Weather Forecast
+
+</h1>
+
+<p>
+
+Upcoming weather for {{ city }}
+
+</p>
+
+</div>
+
+<form>
+
+<input
+name="city"
+placeholder="Enter City">
+
+<button>
+
+Search
+
+</button>
+
+</form>
+
+<div class="forecast-grid">
+
+{% for item in forecast %}
+
+<div class="forecast-card">
+
+<div class="time">
+
+{{ item.time }}
+
+</div>
+
+<img
+src="{{ item.icon }}">
+
+<h2>
+
+{{ item.temp }}°C
+
+</h2>
+
+<p>
+
+{{ item.weather }}
+
+</p>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</div>
+
+</body>
+
+</html>
